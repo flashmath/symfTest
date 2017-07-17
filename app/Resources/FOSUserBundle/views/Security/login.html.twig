@@ -1,0 +1,12 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block subtitle %}<p class="login-box-msg">Connexion pour démarer la session</p>{% endblock %}
+
+{% block fos_user_content %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}
+
+{% block login_link %}
+    <a href="#">J'ai oublié mon mot de passe</a><br>
+    <a href="register.html" class="text-center">S'enregistrer</a>
+{% endblock login_link %}

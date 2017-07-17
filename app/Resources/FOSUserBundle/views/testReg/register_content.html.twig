@@ -1,0 +1,31 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form _self %}
+
+{% block form_errors %}
+    {%  if errors is defined %}
+
+    {% if errors|length > 0 %}
+        beurk self
+        {% set error = errors[0] %}
+        {{
+        error.messagePluralization is null
+        ? error.messageTemplate|trans(error.messageParameters, 'validators')
+        : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+        }}
+        <br/>
+    {% endif %}
+    {% endif %}
+{% endblock form_errors %}
+
+
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+{{ form_errors(form.username) }}
+    {{ form_label(form.username) }}
+    {{ form_errors(form.email) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,6 @@
+user.firstname.not_blank: Entrez votre prénom
+user.firstname.short: Le prénom est trop court
+user.firstname.long: Le prénom est trop long
+user.name.not_blank: Entrez votre nom
+user.name.short: Le nom est trop court
+user.name.long: Le nom est trop long

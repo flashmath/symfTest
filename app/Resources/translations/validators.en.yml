@@ -1,0 +1,7 @@
+user.name.not_blank: Please enter your firstname
+user.name.short: The firstname is too short
+user.name.long: The firstname is too long
+
+user.name.not_blank: Please enter your name
+user.name.short: The name is too short
+user.name.long: The name is too long

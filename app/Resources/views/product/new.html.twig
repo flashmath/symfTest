@@ -1,0 +1,40 @@
+{# app/Resources/views/product/new.html.twig #}
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ClassInvers</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+
+    <script src="{{ asset('js/angular.js') }}"></script>
+    <script src="{{ asset('js/app/app.module.js') }}"></script>
+    <script src="{{ asset('js/app/controllers.js') }}"></script>
+    <script src="{{ asset('js/app/directives.js') }}"></script>
+    <script src="{{ asset('js/app/services.js') }}"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body ng-controller="FileUploadController">
+<h1>Adding a new product</h1>
+
+{{ form_start(form) }}
+{# ... #}
+    <div class="form-group">
+        {{ form_row(form.brochure,{'attr' : {'demo-file-model' : 'myFile'}}) }}
+
+<input type="submit" value="Create"
+       ng-click="uploadFile()" class = "btn btn-primary"/>
+    </div>
+{{ form_end(form) }}
+
+<div id="divResponse">{{ '{{ serverResponse}}' }}</div>
+</body>
+</html>
+

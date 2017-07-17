@@ -1,0 +1,11 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block subtitle %}<p class="login-box-msg">Nouvel utilisateur</p> {% endblock %}
+
+{% block fos_user_content %}
+{% include "@FOSUser/Registration/register_content.html.twig" %}
+{% endblock fos_user_content %}
+
+{% block login_link %}
+    <a href="#">Je suis déjà enregistré</a><br>
+{% endblock login_link %}

@@ -1,0 +1,125 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form _self %}
+
+{% block form_errors %}
+    {%  if errors is defined %}
+
+        {% if errors|length > 0 %}
+            <span class="text-red">
+            {% set error = errors[0] %}
+            {{
+            error.messagePluralization is null
+            ? error.messageTemplate|trans(error.messageParameters, 'validators')
+            : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+            }}
+            </span>
+        {% endif %}
+    {% endif %}
+{% endblock form_errors %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+<div class="form-group has-feedback">
+
+    {{ form_widget(form.email,{'attr' : {'placeholder' : 'Courriel', 'class' : 'form-control'} }) }}
+    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+    {{ form_errors(form.email) }}
+</div>
+
+<script>
+    function checkEmail(){
+       // var regex =/([\\w-\\.]+)@ac-([\\w-]+).fr/g;
+        var constraint = new RegExp("([\\w-\\.]+)@ac-([\\w-]+).fr");
+        var emailField = $('#fos_user_registration_form_email');
+        var value = emailField.val();
+        if (!constraint.test(value)){
+            $('#modal-danger').modal('show');
+            $('#error-email').show();
+            emailField.addClass('text-red');
+        } else {
+            $('#error-email').hide();
+            emailField.removeClass('text-red');
+        }
+    }
+
+    window.onload= function()
+    {
+        document.getElementById('fos_user_registration_form_email').onchange = checkEmail;
+    }
+</script>
+<div class="callout callout-danger" style="display: none" id="error-email">
+    Attention
+</div>
+
+<div class="modal modal-danger fade in" id="modal-danger" style="display: none; padding-right: 17px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Erreur d'adresse de courriel</h4>
+            </div>
+            <div class="modal-body">
+                <p>Vous devez utiliser votre adresse académique</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="form-group has-feedback">
+    {{ form_widget(form.username,{'attr' : {'placeholder' : 'Identifiant', 'class' : 'form-control'} }) }}
+    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+    {{ form_errors(form.username) }}
+</div>
+
+<div class="form-group has-feedback">
+    {{ form_widget(form.plainPassword.first,{'attr' : {'placeholder' : 'Mot de passe', 'class' : 'form-control'} }) }}
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+</div>
+
+<div class="form-group has-feedback">
+    {{ form_widget(form.plainPassword.second,{'attr' : {'placeholder' : 'Répéter le mot de passe', 'class' : 'form-control'} }) }}
+    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+</div>
+
+<div class="form-group has-feedback">
+    {{ form_widget(form.name,{'attr' : {'placeholder' : 'Nom', 'class' : 'form-control'} }) }}
+    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+</div>
+
+<div class="form-group has-feedback">
+    {{ form_widget(form.firstname,{'attr' : {'placeholder' : 'Prénom', 'class' : 'form-control'} }) }}
+    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+</div>
+
+
+
+<div class="row">
+    <div class="col-xs-8">
+        <div class="checkbox icheck">
+            <label class>
+                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;">
+                    {{ form_widget(form.cgu) }}
+               {# <input type="checkbox" id="remember_me" name="_remember_me" value="on"> {{ 'security.login.remember_me'|trans }}#}
+                </div>
+                J'accepte les <a href="#">conditions</a>
+            </label>
+        </div>
+    </div>
+    <!-- /.col -->
+    <div class="col-xs-4">
+        <button type="submit" id="_submit" name="_submit" class="btn btn-primary btn-block btn-flat">Valider</button>
+    </div>
+    <!-- /.col -->
+</div>
+{{ form_widget(form) }}
+
+{#
+    <div>
+        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>#}
+{{ form_end(form) }}
